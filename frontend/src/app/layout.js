@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavigationPage from "@/components/navigation";
+import "react-slideshow-image/dist/styles.css";
+import Context from "./tour/context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <NavigationPage />
-        {children}
+        <Context>{children}</Context>
       </body>
     </html>
   );

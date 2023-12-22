@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using bayar_backend.Models;
 using Npgsql;
-using bayar_backend.Models.Request; // Npgsql ekledik
+using bayar_backend.Models.Request;
+using backend.Models.TravellerRespond; // Npgsql ekledik
 
 namespace bayar_backend.Controllers
 {
@@ -53,7 +54,7 @@ namespace bayar_backend.Controllers
         }
 
         [HttpPost("login")]
-        public bool Login([FromBody] LoginRequest loginRequest)
+        public LoginResponse Login([FromBody] LoginRequest loginRequest)
         {
             try
             {
@@ -70,7 +71,12 @@ namespace bayar_backend.Controllers
                 if (!emailReader.Read())
                 {
                     // E-posta bulunamadı
-                    return false;
+                    return new LoginResponse
+                    {
+                        isSuccess = false,
+                        id = -1
+                    };
+
                 }
 
                 // Şifre kontrolü
@@ -79,19 +85,31 @@ namespace bayar_backend.Controllers
                 if (loginRequest.password == storedPassword)
                 {
                     // Şifre doğru
-                    return true;
+                    return new LoginResponse
+                    {
+                        isSuccess = true,
+                        id = (long)emailReader["id"]
+                    };
                 }
                 else
                 {
                     // Şifre yanlış
-                    return false;
+                    return new LoginResponse
+                    {
+                        isSuccess = false,
+                        id = -1
+                    };
                 }
             }
             catch (Exception ex)
             {
                 // Hata yönetimi burada yapılabilir
                 Console.WriteLine(ex.Message);
-                return false;
+                return new LoginResponse
+                {
+                    isSuccess = false,
+                    id = -1
+                };
             }
             finally
             {

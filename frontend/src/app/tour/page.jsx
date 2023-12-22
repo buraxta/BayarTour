@@ -29,6 +29,7 @@ export default function TourPage() {
       {tours.map((tour) => (
         <TourItem
           key={tour.id}
+          id={tour.id}
           imageUrl={tour.imageUrl}
           description={tour.description}
           name={tour.name}

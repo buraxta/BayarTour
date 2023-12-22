@@ -2,18 +2,19 @@
 import { Button, TextField } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { cx } from "../tour/context";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [info, setInfo] = useState("");
   const router = useRouter();
+  const { globalState, setGlobalState } = useContext(cx);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!email || !password) {
       setInfo("Email and password are required");
       return;
@@ -31,7 +32,8 @@ export default function LoginPage() {
 
       if (response.ok) {
         let isLogin = await response.json();
-        if (isLogin) {
+        if (isLogin.isSuccess) {
+          setGlobalState(isLogin.id);
           setInfo("Login successful");
           setTimeout(() => {
             router.push("/");

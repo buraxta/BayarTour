@@ -57,7 +57,7 @@ export default function LoginPage() {
           <ul className="space-y-6">
             <li className="flex">
               <FaRegAddressBook className="mr-2 text-xl" />
-              Tour Street, No: 123, City: Izmir
+              Şehit Prof. Dr. İlhan Varank Kampüsü, 45140 Yunusemre/Manisa
             </li>
             <li className="flex">
               <BsTelephone className="mr-2 text-xl" />
@@ -65,7 +65,7 @@ export default function LoginPage() {
             </li>
             <li className="flex">
               <MdOutlineMail className="mr-2 text-xl" />
-              tourhermes@hermes.com
+              info@bayartour.com
             </li>
           </ul>
         </Paper>

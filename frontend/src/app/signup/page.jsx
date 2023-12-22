@@ -14,7 +14,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     if (!name || !email || !password) {
-      setError("All fields are required");
+      setInfo("All fields are required");
       return;
     }
 
